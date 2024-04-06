@@ -1,0 +1,179 @@
+plugins {
+    id 'com.android.application'
+    id 'org.jetbrains.kotlin.android'
+    id 'com.google.devtools.ksp'
+}
+
+android {
+    namespace 'com.hasan.jetfasthub'
+    compileSdk 34
+
+    defaultConfig {
+
+        applicationId "com.hasan.jetfasthub"
+        minSdk 24
+        targetSdk 34
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        vectorDrawables {
+            useSupportLibrary true
+        }
+
+        ksp {
+            arg('room.schemaLocation', "$projectDir/schemas")
+        }
+
+        Properties properties = new Properties()
+        properties.load(project.rootProject.file("local.properties").newDataInputStream())
+
+        buildConfigField("String", "PERSONAL_ACCESS_TOKEN", "\"${properties.getProperty("PERSONAL_ACCESS_TOKEN")}\"")
+
+        buildConfigField("String", "JetHubOwner", "\"${properties.getProperty("JetHubOwner")}\"")
+        buildConfigField("String", "JetHubRepoName", "\"${properties.getProperty("JetHubRepoName")}\"")
+
+        buildConfigField("String", "CLIENT_ID", "\"${properties.getProperty("CLIENT_ID")}\"")
+        buildConfigField("String", "CLIENT_SECRET", "\"${properties.getProperty("CLIENT_SECRET")}\"")
+
+        buildConfigField("String", "BASE_URL", "\"${properties.getProperty("BASE_URL")}\"")
+        buildConfigField("String", "BASIC_AUTH_URL", "\"${properties.getProperty("BASIC_AUTH_URL")}\"")
+        buildConfigField("String", "REDIRECT_URL", "\"${properties.getProperty("REDIRECT_URL")}\"")
+        buildConfigField("String", "STATE", "\"${properties.getProperty("STATE")}\"")
+        buildConfigField("String", "SCOPE", "\"${properties.getProperty("SCOPE")}\"")
+
+        buildConfigField("String", "SHARED_PREF", "\"${properties.getProperty("SHARED_PREF")}\"")
+        buildConfigField("String", "TOKEN_KEY", "\"${properties.getProperty("TOKEN_KEY")}\"")
+        buildConfigField("String", "USERNAME_KEY", "\"${properties.getProperty("USERNAME_KEY")}\"")
+
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled = false
+            proguardFiles(
+                    getDefaultProguardFile("proguard-android-optimize.txt"),
+                    "proguard-rules.pro"
+            )
+        }
+        debug {
+            multiDexEnabled false
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
+    }
+
+    buildFeatures {
+        viewBinding = true
+        compose = true
+        buildConfig = true
+    }
+
+    composeOptions {
+        kotlinCompilerExtensionVersion = "1.5.2"
+    }
+
+    kotlinOptions {
+        jvmTarget = "17"
+    }
+
+    packagingOptions {
+        resources {
+            excludes += '/META-INF/{AL2.0,LGPL2.1}'
+        }
+    }
+
+}
+
+dependencies {
+
+    //Either
+    implementation 'io.arrow-kt:arrow-core:1.2.4'
+    implementation 'io.arrow-kt:arrow-syntax:0.12.1'
+
+    //kotlinx immutable list
+    implementation('org.jetbrains.kotlinx:kotlinx-collections-immutable:0.3.7')
+
+    //markdown
+    implementation 'com.github.mukeshsolanki:MarkdownView-Android:2.0.0'
+
+    //to read plain text response
+    implementation 'com.squareup.retrofit2:converter-scalars:2.11.0'
+
+    //room
+    ksp('androidx.room:room-compiler:2.6.1')
+    implementation('androidx.room:room-ktx:2.6.1')
+    implementation('androidx.room:room-paging:2.6.1')
+
+    //system UI controller - accompanist
+    implementation 'com.google.accompanist:accompanist-systemuicontroller:0.34.0'
+
+    //TODO pagination - don't upgrade, idk but items lazy paging version can't be found on new versions
+    //noinspection GradleDependency
+    implementation 'androidx.paging:paging-runtime-ktx:3.2.1'
+    //noinspection GradleDependency
+    implementation 'androidx.paging:paging-compose:3.2.1'
+
+    //tab layout
+    implementation 'com.google.accompanist:accompanist-pager:0.34.0'
+    implementation 'com.google.accompanist:accompanist-pager-indicators:0.34.0'
+
+    //landscapist
+    implementation 'com.github.skydoves:landscapist-glide:2.3.2'
+
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+    implementation 'androidx.navigation:navigation-fragment-ktx:2.7.7'
+
+    implementation 'androidx.compose.ui:ui:1.6.5'
+    implementation 'androidx.compose.ui:ui-tooling:1.6.5'
+    implementation 'androidx.compose.material:material:1.6.5'
+    implementation 'androidx.compose.material3:material3:1.2.1'
+
+    implementation 'androidx.compose.ui:ui-graphics'
+    implementation 'androidx.compose.ui:ui-tooling-preview'
+
+    //web view wrapper
+    implementation 'com.google.accompanist:accompanist-webview:0.34.0'
+
+    // Navigation
+    implementation 'androidx.navigation:navigation-fragment-ktx:2.7.7'
+    implementation 'androidx.navigation:navigation-ui-ktx:2.7.7'
+
+    //lifecycle
+    implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
+
+    //app compat activity
+    implementation 'androidx.appcompat:appcompat:1.6.1'
+
+    //Gson
+    implementation 'com.google.code.gson:gson:2.10.1'
+
+    //Retrofit
+    implementation 'com.squareup.retrofit2:converter-gson:2.11.0'
+    implementation 'com.squareup.retrofit2:retrofit:2.11.0'
+    implementation 'com.squareup.okhttp3:logging-interceptor:5.0.0-alpha.12'
+
+    //chucker
+    debugImplementation 'com.github.chuckerteam.chucker:library:4.0.0'
+    releaseImplementation 'com.github.chuckerteam.chucker:library-no-op:4.0.0'
+
+    // Koin for Android
+    implementation 'io.insert-koin:koin-androidx-compose:3.5.4'
+    implementation 'io.insert-koin:koin-android:3.5.4'
+
+    implementation 'androidx.core:core-ktx:1.12.0'
+    implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.7.0'
+    implementation 'androidx.activity:activity-compose:1.8.2'
+    implementation platform('androidx.compose:compose-bom:2024.04.00')
+    testImplementation 'junit:junit:4.13.2'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+    androidTestImplementation platform('androidx.compose:compose-bom:2024.04.00')
+    androidTestImplementation 'androidx.compose.ui:ui-test-junit4'
+    debugImplementation 'androidx.compose.ui:ui-tooling'
+    debugImplementation 'androidx.compose.ui:ui-test-manifest'
+}
