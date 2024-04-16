@@ -86,6 +86,9 @@ android {
         }
     }
 
+    configurations {
+        all*.exclude group: 'io.arrow-kt', module: 'arrow-core-jvm'
+    }
 }
 
 dependencies {
