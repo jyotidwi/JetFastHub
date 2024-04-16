@@ -24,10 +24,10 @@ jobs:
         run: chmod +x gradlew
 
       - name: Build with Gradle
-        run: ./gradlew assembleDebug
+        run: ./gradlew assembleRelease
 
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v4.3.1
         with:
           name: JetFastHub
-          path: app/build/outputs/apk/debug/*.apk
+          path: app/build/outputs/apk/release/*.apk
