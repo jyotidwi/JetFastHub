@@ -16,8 +16,6 @@ android {
         versionCode 1
         versionName "1.0"
 
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-
         vectorDrawables {
             useSupportLibrary true
         }
@@ -123,7 +121,7 @@ dependencies {
     implementation 'com.google.accompanist:accompanist-pager-indicators:0.34.0'
 
     //landscapist
-    implementation 'com.github.skydoves:landscapist-glide:2.3.2'
+    implementation 'com.github.skydoves:landscapist-glide:2.3.3'
 
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     implementation 'androidx.navigation:navigation-fragment-ktx:2.7.7'
@@ -162,18 +160,20 @@ dependencies {
     releaseImplementation 'com.github.chuckerteam.chucker:library-no-op:4.0.0'
 
     // Koin for Android
-    implementation 'io.insert-koin:koin-androidx-compose:3.5.4'
-    implementation 'io.insert-koin:koin-android:3.5.4'
+    implementation 'io.insert-koin:koin-androidx-compose:3.5.6'
+    implementation 'io.insert-koin:koin-android:3.5.6'
 
     implementation 'androidx.core:core-ktx:1.12.0'
     implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.7.0'
     implementation 'androidx.activity:activity-compose:1.8.2'
     implementation platform('androidx.compose:compose-bom:2024.04.00')
-    testImplementation 'junit:junit:4.13.2'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
-    androidTestImplementation platform('androidx.compose:compose-bom:2024.04.00')
-    androidTestImplementation 'androidx.compose.ui:ui-test-junit4'
-    debugImplementation 'androidx.compose.ui:ui-tooling'
-    debugImplementation 'androidx.compose.ui:ui-test-manifest'
+
+      // test Implementation
+//    testImplementation 'junit:junit:4.13.2'
+//    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
+//    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+//    androidTestImplementation platform('androidx.compose:compose-bom:2024.04.00')
+//    androidTestImplementation 'androidx.compose.ui:ui-test-junit4'
+//    debugImplementation 'androidx.compose.ui:ui-tooling'
+//    debugImplementation 'androidx.compose.ui:ui-test-manifest'
 }
